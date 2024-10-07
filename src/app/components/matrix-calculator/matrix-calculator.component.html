@@ -1,0 +1,28 @@
+<div class="container">
+  <h2>Calculadora de Matrices</h2>
+  <form>
+    <div>
+      <h3>Matriz A</h3>
+      <textarea [(ngModel)]="matrixAInput" name="matrixA"></textarea>
+    </div>
+    <div>
+      <h3>Matriz B</h3>
+      <textarea [(ngModel)]="matrixBInput" name="matrixB"></textarea>
+    </div>
+    <button type="button" (click)="addMatrices()">Sumar</button>
+    <button type="button" (click)="subtractMatrices()">Restar</button>
+    <button type="button" (click)="multiplyMatrices()">Multiplicar</button>
+    <button type="button" (click)="transposeMatrix()">Transpuesta</button>
+  </form>
+
+  <!-- Mostrar el resultado de la operación -->
+  <h3>Resultado:</h3>
+  <div *ngIf="result">
+    <p *ngFor="let row of result">{{ row.join(" ") }}</p>
+  </div>
+
+  <!-- Mostrar mensaje de error si ocurre alguno -->
+  <div *ngIf="errorMessage" class="error-message">
+    <p>Error: {{ errorMessage }}</p>
+  </div>
+</div>
