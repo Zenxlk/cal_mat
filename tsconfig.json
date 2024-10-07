@@ -15,6 +15,7 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
+    "skipLibCheck": true, // Evitar la revision de las Librerias para el funcionamiento del proyecto
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
