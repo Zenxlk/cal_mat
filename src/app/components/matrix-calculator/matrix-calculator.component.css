@@ -1,25 +1,32 @@
 /* Estilos generales */
 body {
   font-family: "Arial", sans-serif;
-  background-color: #f4f4f9;
+  background-color: #215038;
   color: #333;
+  height: 100vh;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
 }
 
-.container {
-  background-color: #fff;
+.main-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 1500px;
+  background-color: #797575;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 500px;
-  width: 100%;
+}
+
+.section {
+  width: 45%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centrar elementos horizontalmente */
+  align-items: center;
 }
 
 h2 {
@@ -32,7 +39,8 @@ h3 {
   color: #333;
   font-size: 1.3em;
   margin-bottom: 10px;
-  text-align: center; /* Centrar encabezados */
+  text-align: center;
+  margin-top: 10px; /* Para consistencia en todas las secciones */
 }
 
 /* Estilo para el área de texto de las matrices */
@@ -59,7 +67,7 @@ button {
   color: white;
   border: none;
   padding: 10px 15px;
-  margin-right: 10px;
+  margin: 5px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1em;
@@ -75,31 +83,151 @@ button:focus {
   border: 2px solid #45a049;
 }
 
-/* Estilo para mostrar el resultado de las matrices */
-h3 + div p {
-  background-color: #e8f5e9;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 5px 0;
-  font-family: monospace;
-  white-space: pre;
+/* Estilos para los resultados */
+/* Estilos para el título de "Resultado" */
+h3 {
+  color: #81eb7d; /* Color blanco para que resalte en el fondo */
+  font-size: 2em;
   text-align: center;
-  color: #333;
-  border: 1px solid #4caf50;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Efecto de sombra suave */
+  font-weight: bold;
 }
 
-/* Estilo para el mensaje de error */
+/* Estilo moderno para la matriz */
+.matrix {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 20px;
+  background: linear-gradient(
+    135deg,
+    #6bd0ff,
+    #249c42
+  ); /* Degradado vibrante */
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra envolvente */
+  animation: popIn 0.5s ease-in-out; /* Animación al aparecer */
+}
+
+/* Animación de entrada suave con rebote */
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Estilos para las filas de la matriz */
+.matrix-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/* Estilos para los valores individuales de la matriz */
+.matrix-row p {
+  margin: 0 10px;
+  padding: 15px 20px;
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 5px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.5em;
+  font-weight: bold;
+  min-width: 50px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+/* Efecto de zoom al pasar sobre los valores */
+.matrix-row p:hover {
+  transform: scale(1.2);
+  background-color: #e0f7fa;
+}
+
+/* Efecto animado de resaltado por fila */
+.matrix-row p:nth-child(odd) {
+  background-color: #f0f4c3;
+  color: #313131;
+}
+
+.matrix-row p:nth-child(even) {
+  background-color: #f0f4c3;
+  color: #313131;
+}
+
+/* Estilos para mensajes de error */
 .error-message {
   background-color: #ffcdd2;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #f44336;
   margin-top: 10px;
-  width: 100%; /* Asegura que el mensaje de error ocupe todo el ancho */
+  width: 100%; /* Asegura que el mensaje ocupe todo el ancho del contenedor */
+  word-wrap: break-word; /* Asegura que el texto se ajuste dentro de la caja */
+  overflow-wrap: break-word; /* Cubre más navegadores */
+  box-sizing: border-box; /* Evita que el padding sobrepase el ancho */
 }
 
 .error-message p {
   color: #f44336;
   margin: 0;
   text-align: center;
+}
+
+.operation-steps {
+  background-color: transparent;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.operation-steps p {
+  font-size: 1.2em;
+  margin: 5px 0;
+  word-break: break-all;
+}
+
+.typing-step {
+  border-right: 2px solid #4caf50;
+  /* white-space: nowrap; */ /* Eliminar esta línea */
+  overflow: hidden;
+  width: 100%;
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  0%,
+  100% {
+    border-color: transparent; /* No visible */
+  }
+  50% {
+    border-color: #4caf50; /* Aparece */
+  }
+}
+/* Para eliminar el parpadeo al final */
+.typing-step.completed {
+  border-right-color: transparent;
+  animation: none;
+}
+
+.completed {
+  cursor: default;
 }

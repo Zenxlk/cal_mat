@@ -1,28 +1,87 @@
-<div class="container">
-  <h2>Calculadora de Matrices</h2>
-  <form>
-    <div>
-      <h3>Matriz A</h3>
-      <textarea [(ngModel)]="matrixAInput" name="matrixA"></textarea>
-    </div>
-    <div>
-      <h3>Matriz B</h3>
-      <textarea [(ngModel)]="matrixBInput" name="matrixB"></textarea>
-    </div>
-    <button type="button" (click)="addMatrices()">Sumar</button>
-    <button type="button" (click)="subtractMatrices()">Restar</button>
-    <button type="button" (click)="multiplyMatrices()">Multiplicar</button>
-    <button type="button" (click)="transposeMatrix()">Transpuesta</button>
-  </form>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Matrices</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Sección de ingreso de matrices -->
+      <div class="section">
+        <h2>Calculadora de Matrices</h2>
+        <form>
+          <div>
+            <h3>Matriz A</h3>
+            <textarea
+              [(ngModel)]="matrixAInput"
+              name="matrixA"
+              placeholder="Introduce la matriz A"
+            ></textarea>
+          </div>
+          <div>
+            <h3>Matriz B</h3>
+            <textarea
+              [(ngModel)]="matrixBInput"
+              name="matrixB"
+              placeholder="Introduce la matriz B"
+            ></textarea>
+          </div>
+          <!-- Botones para las operaciones -->
+          <button type="button" (click)="addMatrices()">Sumar</button>
+          <button type="button" (click)="subtractMatrices()">Restar</button>
+          <button type="button" (click)="multiplyMatrices()">
+            Multiplicar
+          </button>
+          <button type="button" (click)="transposeMatrix()">Transpuesta</button>
+          <button type="button" (click)="determinant2x2()">
+            Determinante 2x2
+          </button>
+          <button type="button" (click)="determinant3x3()">
+            Determinante 3x3
+          </button>
+          <button type="button" (click)="inverse2x2()">Inversa 2x2</button>
+          <button type="button" (click)="inverse3x3()">Inversa 3x3</button>
+          <button type="button" (click)="gaussianElimination2x2()">
+            Reducción Gaussiana 2x2
+          </button>
+          <button type="button" (click)="gaussianElimination3x3()">
+            Reducción Gaussiana 3x3
+          </button>
+        </form>
+      </div>
 
-  <!-- Mostrar el resultado de la operación -->
-  <h3>Resultado:</h3>
-  <div *ngIf="result">
-    <p *ngFor="let row of result">{{ row.join(" ") }}</p>
-  </div>
+      <!-- Sección de resultados de operaciones de matrices -->
+      <div class="section" style="text-align: center">
+        <h3>Operación paso a paso:</h3>
+        <div *ngIf="steps.length > 0" class="operation-steps">
+          <div
+            *ngFor="let step of steps; let i = index"
+            [class.typing-step]="!step.completed"
+            [class.completed]="step.completed"
+          >
+            <p [innerHTML]="step.text"></p>
+          </div>
+        </div>
 
-  <!-- Mostrar mensaje de error si ocurre alguno -->
-  <div *ngIf="errorMessage" class="error-message">
-    <p>Error: {{ errorMessage }}</p>
-  </div>
-</div>
+        <!-- Sección para mostrar el resultado de la matriz -->
+        <h3>Resultado:</h3>
+        <div *ngIf="result" class="matrix animated-result">
+          <div *ngFor="let row of result" class="matrix-row">
+            <p *ngFor="let value of row">{{ value }}</p>
+          </div>
+        </div>
+
+        <!-- Sección para mostrar el determinante -->
+        <div *ngIf="determinant !== null" class="matrix animated-result">
+          <p>{{ determinant }}</p>
+        </div>
+
+        <!-- Mostrar mensaje de error si ocurre alguno -->
+        <div *ngIf="errorMessage" class="error-message animated-result">
+          <p>Error: {{ errorMessage }}</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
